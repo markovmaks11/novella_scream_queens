@@ -1,0 +1,772 @@
+/* Базовый размер текста для мобильных */
+html {
+    font-size: 16px; /* Стандартный размер */
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 14px; /* Поменьше на маленьких экранах */
+    }
+}
+
+/* Все размеры в rem будут масштабироваться относительно этого */
+.novel-title {
+    font-size: 2.2rem; /* Будет 35px на десктопе, 30px на мобильных */
+}
+
+.dialog-text {
+    font-size: 1rem; /* Будет 16px на десктопе, 14px на мобильных */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Georgia', serif;
+    transition: background-color 0.5s ease;
+}
+
+/* Главный экран */
+.main-screen {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+.novel-window {
+    background: linear-gradient(135deg, #2c3e50, #1a1a1a);
+    padding: 60px 80px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(255, 0, 0, 0.2);
+    text-align: center;
+    border: 3px solid #8b0000;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.novel-window::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(139, 0, 0, 0.1) 10px,
+        rgba(139, 0, 0, 0.1) 20px
+    );
+    animation: bloodRain 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes bloodRain {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+.novel-title {
+    font-size: 48px;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+.game-subtitle {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 40px;
+    font-style: italic;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.start-button {
+    background: linear-gradient(135deg, #8b0000, #4a0000);
+    color: white;
+    border: none;
+    padding: 15px 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(139, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.start-button:hover {
+    background: linear-gradient(135deg, #a52a2a, #8b0000);
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(139, 0, 0, 0.5);
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: none;
+    background-color: rgba(0,0,0,0.8);
+    color: #ff6b6b;
+    border-left: 4px solid #8b0000;
+    position: relative;
+    z-index: 1;
+}
+
+.title-input {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #8b0000;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.title-input:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.control-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.reset-button {
+    background-color: #666;
+    color: white;
+}
+
+.color-button {
+    background-color: #8b0000;
+    color: white;
+}
+
+/* Игровой экран */
+.game-container {
+    max-width: 900px;
+    width: 95%;
+    margin: 20px;
+    animation: fadeIn 0.5s ease;
+    position: relative;
+}
+
+.game-screen {
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(139, 0, 0, 0.3);
+    border: 2px solid #8b0000;
+    position: relative;
+    overflow: hidden;
+}
+
+.atmosphere-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 20%, transparent, rgba(139,0,0,0.1));
+    pointer-events: none;
+    z-index: 1;
+    transition: background 0.5s ease;
+}
+
+.character-image {
+    text-align: center;
+    margin-bottom: 20px;
+    min-height: 300px;
+    position: relative;
+    z-index: 2;
+}
+
+.character-image img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    border: 3px solid #8b0000;
+    box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+    transition: all 0.5s ease;
+}
+
+.character-image.shake {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.dialog-box {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+    border: 1px solid #8b0000;
+    backdrop-filter: blur(5px);
+}
+
+.character-name {
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    background: linear-gradient(135deg, #8b0000, #4a0000);
+    color: white;
+    padding: 5px 25px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dialog-text {
+    font-size: 20px;
+    color: #f0f0f0;
+    line-height: 1.6;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    min-height: 100px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.choice-btn {
+    background: rgba(30, 30, 30, 0.9);
+    border: 2px solid #8b0000;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    color: #f0f0f0;
+    font-family: 'Georgia', serif;
+}
+
+.choice-btn:hover {
+    background: linear-gradient(135deg, #8b0000, #4a0000);
+    transform: translateX(10px);
+    border-color: #ff6b6b;
+    box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+}
+
+.continue-btn {
+    background: linear-gradient(135deg, #8b0000, #4a0000);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.continue-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(139, 0, 0, 0.4);
+}
+
+.back-btn {
+    background: rgba(0,0,0,0.7);
+    color: #ff6b6b;
+    border: 1px solid #8b0000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.back-btn:hover {
+    background: #8b0000;
+    color: white;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bloodDrip {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+    .novel-window {
+        padding: 30px 40px;
+    }
+    
+    .novel-title {
+        font-size: 32px;
+    }
+    
+    .character-image img {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .dialog-text {
+        font-size: 16px;
+    }
+    
+    .choice-btn {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+}
+/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
+
+/* Для очень маленьких телефонов (до 400px) - например iPhone SE */
+@media (max-width: 400px) {
+    .novel-window {
+        padding: 15px !important;
+        margin: 10px !important;
+        width: calc(100% - 20px) !important;
+    }
+    
+    .novel-title {
+        font-size: 24px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .start-button {
+        padding: 12px 20px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+    }
+    
+    .title-input {
+        width: 100% !important;
+        font-size: 14px !important;
+        padding: 8px !important;
+        margin: 10px 0 !important;
+    }
+    
+    .controls {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .control-button {
+        width: 100% !important;
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Адаптация игрового экрана */
+    .character-image img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    
+    .dialog-box {
+        padding: 15px !important;
+        margin: 10px 0 !important;
+    }
+    
+    .dialog-text {
+        font-size: 14px !important;
+        min-height: 60px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .character-name {
+        font-size: 14px !important;
+        padding: 3px 15px !important;
+        top: -12px !important;
+    }
+    
+    .choice-btn {
+        padding: 12px !important;
+        font-size: 14px !important;
+        margin: 3px 0 !important;
+    }
+    
+    .continue-btn {
+        padding: 12px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+    }
+    
+    .back-btn {
+        padding: 8px !important;
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+    
+    /* Убираем лишние отступы */
+    .game-screen {
+        padding: 10px !important;
+    }
+}
+
+/* Для обычных телефонов (401px - 600px) */
+@media (min-width: 401px) and (max-width: 600px) {
+    .novel-window {
+        padding: 25px !important;
+        margin: 15px !important;
+    }
+    
+    .novel-title {
+        font-size: 28px !important;
+    }
+    
+    .start-button {
+        padding: 12px 30px !important;
+        font-size: 18px !important;
+    }
+    
+    .title-input {
+        width: 100% !important;
+    }
+    
+    .controls {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+    
+    .control-button {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+    }
+    
+    .character-image img {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    
+    .dialog-text {
+        font-size: 16px !important;
+        min-height: 70px !important;
+    }
+    
+    .choice-btn {
+        padding: 14px !important;
+        font-size: 15px !important;
+    }
+}
+
+/* Для больших телефонов и маленьких планшетов (601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .novel-window {
+        padding: 35px !important;
+    }
+    
+    .character-image img {
+        width: 200px !important;
+        height: 200px !important;
+    }
+    
+    .dialog-text {
+        font-size: 17px !important;
+    }
+}
+
+/* Для телефонов с вырезом (notch) - iPhone X и новее */
+@supports (padding: max(0px)) {
+    .container, .game-container {
+        padding-left: max(20px, env(safe-area-inset-left)) !important;
+        padding-right: max(20px, env(safe-area-inset-right)) !important;
+        padding-top: max(20px, env(safe-area-inset-top)) !important;
+        padding-bottom: max(20px, env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* Улучшаем тач-взаимодействие - кнопки лучше реагируют на нажатия */
+.choice-btn, .control-button, .start-button, .continue-btn, .back-btn {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    min-height: 44px !important; /* Минимальный размер для удобного нажатия */
+}
+
+/* Анимация нажатия для мобильных */
+.choice-btn:active, .control-button:active, .start-button:active, .continue-btn:active, .back-btn:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.1s !important;
+    opacity: 0.9 !important;
+}
+
+/* Убираем выделение текста при нажатии (чтобы не мигало) */
+* {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Разрешаем выделение только в полях ввода (чтобы можно было вводить текст) */
+input, textarea {
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+}
+
+/* Фикс для 100vh на мобильных (проблема с адресной строкой браузера) */
+body, .main-screen, .game-container {
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+}
+
+html {
+    height: -webkit-fill-available !important;
+}
+
+/* Улучшаем прокрутку, если контент не помещается на экран */
+.game-screen {
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important; /* Плавная прокрутка на iOS */
+    scrollbar-width: none !important; /* Скрываем полосу прокрутки в Firefox */
+}
+
+/* Скрываем полосу прокрутки, но оставляем функционал (красивее выглядит) */
+.game-screen::-webkit-scrollbar {
+    width: 0 !important;
+    background: transparent !important;
+    display: none !important;
+}
+
+/* Адаптация для горизонтальной ориентации (когда телефон повернут) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .character-image img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    .dialog-box {
+        padding: 8px !important;
+        margin: 5px 0 !important;
+    }
+    
+    .dialog-text {
+        font-size: 12px !important;
+        min-height: 40px !important;
+        line-height: 1.3 !important;
+    }
+    
+    .character-name {
+        font-size: 12px !important;
+        padding: 2px 12px !important;
+        top: -10px !important;
+    }
+    
+    .choices {
+        gap: 3px !important;
+    }
+    
+    .choice-btn {
+        padding: 6px !important;
+        font-size: 11px !important;
+        min-height: 30px !important;
+    }
+    
+    .continue-btn {
+        padding: 8px !important;
+        font-size: 12px !important;
+        min-height: 35px !important;
+    }
+    
+    /* В горизонтальном режиме картинка маленькая, текст компактный */
+    .game-screen {
+        padding: 5px !important;
+    }
+}
+
+/* Для очень маленьких экранов в горизонтальной ориентации */
+@media (orientation: landscape) and (max-height: 400px) {
+    .character-image img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .dialog-text {
+        font-size: 11px !important;
+        min-height: 30px !important;
+    }
+    
+    .choice-btn {
+        padding: 4px !important;
+        font-size: 10px !important;
+    }
+}
+
+/* Улучшаем читаемость текста на мобильных */
+.dialog-text {
+    word-break: break-word !important; /* Перенос длинных слов */
+    hyphens: auto !important; /* Расстановка переносов */
+}
+
+/* Делаем кнопки выбора более удобными на мобильных */
+.choice-btn {
+    text-align: left !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 8px !important;
+    border-width: 1px !important;
+}
+
+/* Убираем hover-эффекты на мобильных (они мешают) */
+@media (hover: none) and (pointer: coarse) {
+    .choice-btn:hover, .control-button:hover, .start-button:hover, .continue-btn:hover, .back-btn:hover {
+        transform: none !important;
+        background-color: inherit !important;
+    }
+    
+    /* Оставляем только active эффект при нажатии */
+    .choice-btn:active, .control-button:active, .start-button:active, .continue-btn:active, .back-btn:active {
+        transform: scale(0.97) !important;
+    }
+}
+
+/* Фикс для очень маленьких кнопок */
+.game-container {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px !important;
+}
+
+/* Убеждаемся, что ничего не вылезает за экран */
+img, svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Центрируем все по центру на мобильных */
+.main-screen, .game-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+/* ========== УЛУЧШЕНИЯ ДЛЯ УДОБСТВА ========== */
+
+/* Увеличиваем область нажатия для маленьких кнопок */
+.back-btn {
+    position: relative !important;
+    z-index: 10 !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+/* Добавляем отступы снизу, чтобы кнопки не были в самом низу */
+.game-screen {
+    padding-bottom: 20px !important;
+}
+
+/* Для очень старых телефонов */
+@media (max-width: 320px) {
+    .novel-title {
+        font-size: 20px !important;
+    }
+    
+    .character-image img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .dialog-text {
+        font-size: 12px !important;
+    }
+}
+
+/* Анимация появления для мобильных (плавнее) */
+@keyframes fadeInMobile {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-screen {
+    animation: fadeInMobile 0.3s ease !important;
+}
+
+/* Исправляем возможные проблемы с flexbox на старых браузерах */
+.container, .game-container, .main-screen {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- ВАЖНО: эти мета-теги заставят сайт правильно отображаться на телефонах -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Капа Капа Таун</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Главный экран с названием -->
+    <div class="main-screen" id="mainScreen">
+        <div class="container">
+            <div class="novel-window" id="novelWindow">
+                <h1 class="novel-title" id="novelTitle">Капа Капа Таун</h1>
+                <p class="game-subtitle">История Шанель Оберлин</p>
+                
+                <button class="start-button" id="startBtn">Начать игру</button>
+                
+                <div class="message" id="message"></div>
+                
+                <input type="text" class="title-input" id="titleInput" placeholder="Введите название новеллы">
+                
+                <div class="controls">
+                    <button class="control-button reset-button" id="resetBtn">Сбросить</button>
+                    <button class="control-button color-button" id="colorBtn">Сменить цвет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран визуальной новеллы -->
+    <div class="game-container" id="gameContainer" style="display: none;">
+        <div class="game-screen">
+            <!-- Затемнение для атмосферы -->
+            <div class="atmosphere-overlay" id="atmosphereOverlay"></div>
+            
+            <!-- Изображение персонажа/фона -->
+            <div class="character-image" id="characterImage">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='120' r='60' fill='%23F5DEB3'/%3E%3Crect x='120' y='180' width='60' height='90' fill='%238B4513'/%3E%3Ccircle cx='120' cy='100' r='8' fill='%23000'/%3E%3Ccircle cx='180' cy='100' r='8' fill='%23000'/%3E%3Cpath d='M120 140 Q150 160 180 140' stroke='%23FF69B4' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Шанель Оберлин" id="characterImg">
+            </div>
+
+            <!-- Диалоговое окно -->
+            <div class="dialog-box">
+                <div class="character-name" id="characterName">Шанель Оберлин</div>
+                <div class="dialog-text" id="dialogText"></div>
+                
+                <!-- Кнопки выбора -->
+                <div class="choices" id="choicesContainer"></div>
+
+                <!-- Кнопка продолжения -->
+                <button class="continue-btn" id="continueBtn" style="display: none;">Продолжить →</button>
+            </div>
+
+            <!-- Кнопка возврата -->
+            <button class="back-btn" id="backToMainBtn">← На главную</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
